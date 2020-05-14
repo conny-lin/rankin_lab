@@ -1,0 +1,8 @@
++++++++++++++++
+makeMWTDatabase
++++++++++++++++
+
+development TODO:
+- add MWT index + issues flag
+- update record
+- assign permanent id to mwt name, do not change it every time database is rebuilt

@@ -1,0 +1,2 @@
+java -Xmx2G -cp /home/crankin/scala/lib/scala-library.jar:/home/crankin/scala/lib/scala-swing.jar:/home/crankin/NewMaestro/Maestro.jar maestro.Maestro -Xmx6G @-jar=/home/crankin/NewMaestro/Chore_1.3.0.r1035.jar +--plugin=Reoutline +--plugin=Respine
+

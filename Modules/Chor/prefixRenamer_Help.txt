@@ -1,0 +1,11 @@
+How to use prefixRenamer.jar:
+
+This only works with an unziped folder, so if your experiment folder is zipped then you will need to unzip it to begin (I will try to make it work with zipped files when I've got more time).
+
+Open the terminal.
+
+type: java -jar **drag in prefixRenamer.jar from the Desktop** New_Prefix_Goes_Here
+
+If you want the experiment folder zipped, then you'll have to re-zip it manually once the program has done the renaming.
+
+Note: it is a good idea to test that the program is renaming things properly before you delete the initial data.  I have tested it in a few examples, but if it screws up for a reason that I missed when testing you don't want to lose all your data!!!  If you find any problems let me know and I'll adjust the program.

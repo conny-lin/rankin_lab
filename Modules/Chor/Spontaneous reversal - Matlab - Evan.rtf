@@ -1,0 +1,118 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf390
+{\fonttbl\f0\froman\fcharset0 Garamond;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720
+
+\f0\fs32 \cf0 Hey Conny, \
+For Choreography use the MeasureReversal plugin:\
+\pard\pardeftab720
+
+\f1 \cf0 \
+\pard\pardeftab720
+
+\f0\fs20 \cf0 --plugin MeasureReversal::postfix=txt
+\fs32 \
+\
+This will give you a .txt file for every object listing each reversal for that object. The following matlab script will combine your plates for 1 condition and give a .sprev file for whatever intervals you specify in the %input options section. In the script below you'd get the spontaneous reversals from 180-190s, 190-200s, 200-210s, but this could be adjusted however you needed. For example, for spontaneous reversals for the first three minutes, it'd be\'a0 \
+\
+revInit = 0:60:120;\
+revTerm = 60:60:180;\
+\
+The .sprev files contain summarized info about the spontaneous reversals for each interval. This script works, but it's not very elegant so I'll be embarrassed if you show it to your programming boyfriend! I can explain more about the output in person if you want it.\
+\
+\
+%%%%%%%%\
+% input options\
+revInit = 180:10:200;\
+revTerm = 190:10:210;\
+%\
+\
+for t = 1:size(revInit,2);\
+\
+\
+Motherfoldercontents = dir(pwd);\
+\
+%counting counts the group folders\
+counting = 0;\
+\
+Togetherness= zeros(1,5);\
+\
+%Loops through folders\
+for z = 1 : numel(Motherfoldercontents)\
+\'a0\'a0\'a0 if Motherfoldercontents(z).isdir && ~any(strcmp(Motherfoldercontents(z).name, \{'.' '..'\}))\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 counting=counting+1;\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 group(counting).name = Motherfoldercontents(z).name;\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 parentfolder = Motherfoldercontents(z).name;\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 cd(parentfolder);\
+\
+reversals = zeros(1,4);\
+\
+dirData = dir('*.txt');\
+\
+for k = 1:size(dirData,1);\
+\
+storedData = dlmread(dirData(k).name);\
+\
+stimRevs = storedData(:,2) > revInit(1,t) & storedData(:,2) < revTerm(1,t);\
+\
+datum = storedData(stimRevs,:);\
+\
+reversals = [reversals; datum];\
+\
+\
+\
+end\
+\
+RevTerms(:,1)=reversals(:,2)+reversals(:,4);\
+overTime = RevTerms(:,1)>revTerm(1,t);\
+RevTerms(overTime,1) = revTerm(1,t);\
+RevTerms(:,2) = RevTerms(:,1)-reversals(:,2);\
+\
+dirDatData = dir('*.dat');\
+storedDatData = dlmread(dirDatData(end).name);\
+validTimes = storedDatData(:,1) > revInit(1,t) & storedDatData(:,1) < revTerm(1,t);\
+Datdatum = storedDatData(validTimes,:);\
+wormTime = diff(Datdatum(:,1));\
+wormTime(:,2)=wormTime(:,1).*Datdatum(2:end,3);\
+\
+\
+Summary(counting,1) = min(Datdatum(1:end,3));\
+Summary(counting,2) = max(Datdatum(1:end,3));\
+Summary(counting,3) = sum(wormTime(:,2));\
+Summary(counting,4) = size(reversals(2:end,2),1);\
+Summary(counting,5) = size(unique(reversals(2:end,1)),1);\
+Summary(counting,6) = mean(reversals(2:end,3));\
+Summary(counting,7) = mean(reversals(2:end,4));\
+Summary(counting,8) = sum(RevTerms(2:end,2));\
+\
+cd ('..');\
+clearvars -except Summary revInit revTerm Motherfoldercontents counting z t\
+\
+\'a0\'a0\'a0 end\
+end\
+\
+\
+currentDirectory = pwd;\
+[upperPath, deepestFolder] = fileparts(currentDirectory);\
+\
+stimNum = num2str(revInit(1,t));\
+\
+underscore = '_';\
+\
+saveProg = ['save ' deepestFolder underscore stimNum '.sprevs Summary /ascii'];\
+\
+eval(saveProg);\
+\
+clearvars -except revInit revTerm\
+\
+end\
+\
+clear all\
+\
+\
+\
+\
+\
+}
