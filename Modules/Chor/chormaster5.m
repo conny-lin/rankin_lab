@@ -284,8 +284,9 @@ for x = 1:numel(pF)
     [fn,p] = dircontent(pF{x});
     i = regexpcellout(fn,'\<[.]');
     if sum(i)>0
-        fprintf('deleting temp files: \n');
+        fprintf('deleting temp files starting with "."...');
         cellfun(@delete,p(i))
+        fprintf('done\n')
     end
 end
 
