@@ -107,6 +107,7 @@ oevan = '-O evan -o nNss*b12'; % Evan's dat output
 oevanall = '-O evanall -N all -o nNss*b12';
 oswanlakeall = '-O swanlakeall -N all -o tnNemMawlkcspbd1';
 oswanlake = '-O swanlake -o tnNemMawlkcspbd1e#m#M#a#w#l#k#c#s#p#b#d#e-m-M-a-w-l-k-c-s-p-b-d-e*m*M*a*w*l*kvc*s*p*b*d*';
+onutcracker = '-O nutcracker -N all -o DfpemMwWlLaAkcsSbpdxyuvor1234';
 % Trinity app analysis for rastor plot and spontaneous locomotion
 otrinity = '-O trinity -N all -o nNss*b12xyMmeSakcr'; 
 ostarfish = '-O starfish -N all -o nNss*b12xyMmeSakcr';
@@ -117,6 +118,11 @@ ogangnam = '-O gangnam -N all -o DpmcobdPsSruvxy1';
 chorscript = {};
 matval = {};
 switch option
+    case 'Nutcracker'
+       chorscript{1} = [javacall,b,javaRAM,b,chor,b,pixelsize,b,speed,b,...
+            mintime,b,minmove,b,shape,b,onutcracker,b,...
+            preoutline,b,prespine,b]; 
+        fval = {'*nutcracker*'}; 
     case 'Gangnam'
        chorscript{1} = [javacall,b,javaRAM,b,chor,b,pixelsize,b,speed,b,...
             mintime,b,minmove,b,shape,b,ogangnam,b,...
