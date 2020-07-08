@@ -1,6 +1,6 @@
 function DataMeta = IS_getData_Trinity(pMWT,mwtID,startTime,endTime)
 
-    load('/Users/connylin/Dropbox/Code/Matlab/Library RL/Modules/Chor_output_handling/legend_trinity.mat')
+    load('/Users/connylin/Code/proj/rankin_lab/Modules/Chor_output_handling/legend_trinity.mat')
     legend_trinity(end+1) = {'id'};
     DataMeta = cell(size(pMWT)); % create array
     mwtIDheader = cell(size(pMWT)); % create mwtid header
